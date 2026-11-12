@@ -461,7 +461,9 @@ window.DATOS = {
     "Tras dos jornadas, el Kangretx ha cedido 63 puntos ante Makoak y el rebote se ha convertido en asignatura pendiente. \"Tenemos tiro y tenemos ganas, pero cuando la pelota cae en la zona falta alguien grande que la pelee\", explicó.",
     "El perfil está claro: altura, buenas manos y disponibilidad para los fines de semana. La experiencia se valora; la condición física, se negocia. El club no ha querido dar nombres, pero fuentes cercanas al vestuario aseguran que ya se han hecho \"un par de llamadas\".",
     "Si conoces a alguien que encaje, la puerta del vestuario está abierta."
-   ]
+   ],
+   "imagen": "noticias/mitxel-mercado.jpg",
+   "pie": "Mitxel Cuesta, en plena rueda de prensa."
   },
   {
    "id": "resaca-makoak",
