@@ -477,6 +477,22 @@ window.DATOS = {
     "Casas fue lo mejor del equipo con 15 puntos y 4 triples, pero no bastó para frenar a un Makoak que dominó el rebote y castigó cada error.",
     "La próxima cita es este sábado en Corazonistas. El cuerpo técnico ya ha pedido una cosa: el viernes, a dormir pronto."
    ]
+  },
+  {
+   "id": "patrocinio-head-spa",
+   "fecha": "2026-11-12",
+   "seccion": "Club",
+   "titular": "Japanese Head Spa, nuevo patrocinador del Kangretx Old Stars",
+   "entradilla": "El club da las gracias a Adrián Angulo, mecenas del baloncesto, cuya colaboración ayudará a encontrar el 5 que tanto buscamos.",
+   "imagen": "noticias/patrocinio-japanese-head-spa.jpg",
+   "pie": "Nuestra estrella, recibiendo su primer tratamiento en Japanese Head Spa.",
+   "cuerpo": [
+    "El Kangretx Old Stars estrena patrocinador. Japanese Head Spa se suma al proyecto y su logo luce ya en lo más alto de nuestra web, justo al lado del escudo.",
+    "Detrás de este acuerdo está Adrián Angulo, un auténtico mecenas del basket, a quien el vestuario quiere agradecer públicamente su colaboración y su confianza en un equipo con más veteranía que centímetros.",
+    "El apoyo llega en el momento justo. Como ya avanzó Mitxel Cuesta, el equipo está en el mercado buscando un 5, y la ayuda de Adrián será clave para encontrar a ese pívot que domine la zona y nos dé los rebotes que se nos escaparon contra Makoak.",
+    "Además, la plantilla ya tiene claro dónde recuperarse después de cada partido. Si las piernas no responden, al menos la cabeza llegará relajada.",
+    "Gracias, Adrián. ¡Aúpa Kangretx!"
+   ]
   }
  ]
 };
