@@ -57,9 +57,13 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 :root[data-theme="dark"] .crest img{filter:brightness(1.9) saturate(.85)}
 .brand h1{font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 1;font-size:clamp(24px,6vw,32px);line-height:1;margin:0;color:var(--brick);letter-spacing:.01em}
 .brand p{margin:4px 0 0;font-size:13px;color:var(--muted)}
-nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
-nav::-webkit-scrollbar{display:none}
-nav a{flex:none;padding:10px 14px;font-family:var(--f-num);font-weight:600;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent}
+nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 2px}
+nav a{flex:1 1 auto;text-align:center;padding:10px 6px;font-family:var(--f-num);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}
+@media (max-width:640px){
+  nav{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  nav a{padding:9px 2px;font-size:13px;letter-spacing:.02em}
+}
+@media (max-width:360px){ nav a{font-size:12px;letter-spacing:0} }
 nav a[aria-current="page"]{color:var(--brick);border-bottom-color:var(--brick)}
 nav a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--brick-2);outline-offset:2px}
 main{padding-block:20px 48px;display:grid;gap:20px}
