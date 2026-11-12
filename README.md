@@ -4,3 +4,5 @@
 - `netlify/functions/asistencia.mts` — guarda la asistencia en Netlify Blobs (`/api/asistencia`).
 
 Para actualizar resultados o estadísticas: edita `public/datos.js` y haz commit; Netlify publica solo.
+
+Web: https://kangretx.netlify.app
