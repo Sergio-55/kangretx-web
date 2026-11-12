@@ -169,6 +169,12 @@ table.clasi{width:100%;border-collapse:collapse;font-variant-numeric:tabular-num
 .sponsor img{display:block;width:100%;height:auto}
 @media (max-width:520px){.crest{width:64px;height:64px}.sponsor .logo{width:124px;padding:4px 6px}.brand h1{font-size:21px}.brand p{display:none}}
 .login{display:grid;gap:10px}
+.news{display:grid;gap:16px}
+.nota{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px 8px;max-width:68ch}
+.nota-meta{font-family:var(--f-num);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--brick)}
+.nota h3{font-family:var(--f-num);font-weight:700;font-size:clamp(21px,5vw,26px);line-height:1.15;margin:6px 0 8px;text-wrap:balance}
+.nota .entradilla{font-weight:500;font-size:17px;color:var(--ink)}
+.nota p{margin:0 0 12px;line-height:1.55;color:var(--ink)}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
 a.ext{color:var(--brick-2);font-weight:600}
 @media (prefers-reduced-motion:no-preference){.hero{animation:rise .5s ease-out both}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
@@ -191,6 +197,7 @@ a.ext{color:var(--brick-2);font-weight:600}
     </div>
     <nav aria-label="Secciones">
       <a href="#proximo" data-tab="proximo">Próximo</a>
+      <a href="#noticias" data-tab="noticias">Noticias</a>
       <a href="#calendario" data-tab="calendario">Calendario</a>
       <a href="#clasificacion" data-tab="clasificacion">Clasificación</a>
       <a href="#estadisticas" data-tab="estadisticas">Estadísticas</a>
@@ -210,7 +217,7 @@ const TEAM = "Kangretx Old Stars";
 const CLASI_URL = "https://www.basketaraba.com/es/fab-online/clasificaciones-federacion-alavesa-de-baloncesto?grupo=1003&seccion=0";
 const S = {loaded:false, error:false, partidos:[], jugadores:[], asis:{}, stats:{}, clasi:[], ajustes:{}, hoy:null,
   me:null, sel:null, statView:"partido", statSel:null, statSort:"pts", pending:0};
-const tabs = ["proximo","calendario","clasificacion","estadisticas","asistencia","plantilla"];
+const tabs = ["proximo","noticias","calendario","clasificacion","estadisticas","asistencia","plantilla"];
 S.auth=null;
 try{ S.auth = JSON.parse(localStorage.getItem("kg_auth")||"null"); }catch(e){}
 S.me = S.auth?.jugador || null;
@@ -304,6 +311,19 @@ function vProximo(){
     ${last?`<p class="note">Último: ${esc(teams(last).join(" – "))} · <strong>${last.local?`${last.nos}–${last.ellos}`:`${last.ellos}–${last.nos}`}</strong> (${+last.nos>+last.ellos?"victoria":"derrota"})</p>`:""}
     ${S.ajustes.web_federacion?`<p class="note">Datos oficiales en la <a class="ext" href="${esc(S.ajustes.web_federacion)}" target="_blank" rel="noopener">web de la Federación Alavesa</a>.</p>`:""}
   </section>`;
+}
+
+function vNoticias(){
+  if(!S.loaded) return banner()+loading();
+  const n=[...(window.DATOS?.noticias||[])].sort((a,b)=>String(b.fecha).localeCompare(String(a.fecha)));
+  if(!n.length) return `<div class="card empty"><strong>Aún no hay noticias</strong></div>`;
+  return `<h2>Noticias del vestuario</h2>
+  <div class="news">${n.map(x=>`<article class="nota" id="n-${esc(x.id)}">
+    <div class="nota-meta">${esc(fmtDate(x.fecha,{weekday:"long",day:"numeric",month:"long"}))}${x.seccion?` · ${esc(x.seccion)}`:""}</div>
+    <h3>${esc(x.titular)}</h3>
+    ${x.entradilla?`<p class="entradilla">${esc(x.entradilla)}</p>`:""}
+    ${(x.cuerpo||[]).map(par=>`<p>${esc(par)}</p>`).join("")}
+  </article>`).join("")}</div>`;
 }
 
 function vCalendario(){
@@ -407,7 +427,7 @@ function render(){
   const t=tab();
   document.querySelectorAll("nav a").forEach(a=>a.setAttribute("aria-current", a.dataset.tab===t?"page":"false"));
   const keep={}; document.querySelectorAll("#app input[id]").forEach(el=>keep[el.id]=el.value); const fid=document.activeElement?.id;
-  $("#app").innerHTML=({proximo:vProximo,calendario:vCalendario,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
+  $("#app").innerHTML=({proximo:vProximo,noticias:vNoticias,calendario:vCalendario,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
   for(const [id,v] of Object.entries(keep)){ const el=document.getElementById(id); if(el) el.value=v; }
   if(fid){ const el=document.getElementById(fid); if(el&&el.tagName==="INPUT") el.focus(); }
 }

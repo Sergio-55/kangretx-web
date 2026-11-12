@@ -448,5 +448,33 @@ window.DATOS = {
  "ajustes": {
   "clasificacion_jornada": "3",
   "web_federacion": "https://www.basketaraba.com/es/fab-online/calendario-y-resultados-federacion-alavesa-de-baloncesto?grupo=1003&seccion=2"
- }
+ },
+ "noticias": [
+  {
+   "id": "mercado-pivot",
+   "fecha": "2026-11-12",
+   "seccion": "Fichajes",
+   "titular": "Mitxel Cuesta: \"Estamos en el mercado\"",
+   "entradilla": "El capitán reconoce que el Kangretx sigue buscando un pívot que ponga centímetros y aguante debajo del aro.",
+   "cuerpo": [
+    "Lo dijo sin rodeos al salir del vestuario: \"Estamos en el mercado\". Mitxel Cuesta, uno de los fijos del Kangretx Old Stars, confirmó lo que ya era un secreto a voces en la grada: el equipo necesita un pívot.",
+    "Tras dos jornadas, el Kangretx ha cedido 63 puntos ante Makoak y el rebote se ha convertido en asignatura pendiente. \"Tenemos tiro y tenemos ganas, pero cuando la pelota cae en la zona falta alguien grande que la pelee\", explicó.",
+    "El perfil está claro: altura, buenas manos y disponibilidad para los fines de semana. La experiencia se valora; la condición física, se negocia. El club no ha querido dar nombres, pero fuentes cercanas al vestuario aseguran que ya se han hecho \"un par de llamadas\".",
+    "Si conoces a alguien que encaje, la puerta del vestuario está abierta."
+   ]
+  },
+  {
+   "id": "resaca-makoak",
+   "fecha": "2026-11-09",
+   "seccion": "Crónica",
+   "titular": "Dudas en el equipo: derrota abultada contra Makoak",
+   "entradilla": "No se puede ir de resaca a jugar: Pani olía a alcohol.",
+   "cuerpo": [
+    "Domingo complicado en casa. El Kangretx Old Stars cayó 49–63 ante C.B. Makoak en la tercera jornada y la derrota deja más preguntas que respuestas. El equipo aguantó el primer tiempo (23–20 al descanso) pero se vino abajo en la segunda mitad, con un parcial de 26–43 que lo dice todo.",
+    "En el vestuario el diagnóstico fue unánime: no se puede ir de resaca a jugar. Las miradas apuntaron a Pani, que según varios testigos olía a alcohol desde el calentamiento. Él lo niega todo y presenta sus números como prueba: 8 puntos y un perfecto 2 de 2 desde el tiro libre.",
+    "Casas fue lo mejor del equipo con 15 puntos y 4 triples, pero no bastó para frenar a un Makoak que dominó el rebote y castigó cada error.",
+    "La próxima cita es este sábado en Corazonistas. El cuerpo técnico ya ha pedido una cosa: el viernes, a dormir pronto."
+   ]
+  }
+ ]
 };
