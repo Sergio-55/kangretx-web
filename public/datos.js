@@ -473,7 +473,7 @@ window.DATOS = {
    "entradilla": "No se puede ir de resaca a jugar: Pani olía a alcohol.",
    "cuerpo": [
     "Domingo complicado en casa. El Kangretx Old Stars cayó 49–63 ante C.B. Makoak en la tercera jornada y la derrota deja más preguntas que respuestas. El equipo aguantó el primer tiempo (23–20 al descanso) pero se vino abajo en la segunda mitad, con un parcial de 26–43 que lo dice todo.",
-    "En el vestuario el diagnóstico fue unánime: no se puede ir de resaca a jugar. Las miradas apuntaron a Pani, que según varios testigos olía a alcohol desde el calentamiento. Él lo niega todo y presenta sus números como prueba: 8 puntos y un perfecto 2 de 2 desde el tiro libre.",
+    "En el vestuario el diagnóstico fue unánime: no se puede ir de resaca a jugar. Las miradas apuntaron a Pani, que según varios testigos olía a alcohol desde el calentamiento y, para colmo, se presentó sin desayunar. Él lo niega todo y presenta sus números como prueba: 8 puntos y un perfecto 2 de 2 desde el tiro libre.",
     "Casas fue lo mejor del equipo con 15 puntos y 4 triples, pero no bastó para frenar a un Makoak que dominó el rebote y castigó cada error.",
     "La próxima cita es este sábado en Corazonistas. El cuerpo técnico ya ha pedido una cosa: el viernes, a dormir pronto."
    ]
