@@ -156,6 +156,7 @@ table.clasi{width:100%;border-collapse:collapse;font-variant-numeric:tabular-num
 .sponsor .logo{background:#FFFFFF;border:1px solid var(--line);border-radius:12px;padding:6px 10px;display:block;width:190px}
 .sponsor img{display:block;width:100%;height:auto}
 @media (max-width:520px){.crest{width:64px;height:64px}.sponsor .logo{width:124px;padding:4px 6px}.brand h1{font-size:21px}.brand p{display:none}}
+.login{display:grid;gap:10px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
 a.ext{color:var(--brick-2);font-weight:600}
 @media (prefers-reduced-motion:no-preference){.hero{animation:rise .5s ease-out both}@keyframes rise{from{transform:translateY(6px)}to{transform:none}}}
@@ -198,7 +199,9 @@ const CLASI_URL = "https://www.basketaraba.com/es/fab-online/clasificaciones-fed
 const S = {loaded:false, error:false, partidos:[], jugadores:[], asis:{}, stats:{}, clasi:[], ajustes:{}, hoy:null,
   me:null, sel:null, statView:"partido", statSel:null, statSort:"pts", pending:0};
 const tabs = ["proximo","calendario","clasificacion","estadisticas","asistencia","plantilla"];
-try{ S.me = localStorage.getItem("kg_me"); }catch(e){}
+S.auth=null;
+try{ S.auth = JSON.parse(localStorage.getItem("kg_auth")||"null"); }catch(e){}
+S.me = S.auth?.jugador || null;
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -228,17 +231,28 @@ function record(){ let v=0,d=0; for(const p of S.partidos) if(played(p)) (+p.nos
 function myPos(){ const i=S.clasi.findIndex(x=>isUs(x.equipo)); return i<0?null:i+1; }
 
 /* ---------- piezas ---------- */
+const canEdit = jid => !!S.auth && (S.auth.admin || S.auth.jugador===jid);
 function rsvpButtons(pid, jid){
-  const v=(S.asis[pid]||{})[jid];
+  const v=(S.asis[pid]||{})[jid]; const dis=canEdit(jid)?"":"disabled";
   return `<div class="rsvp" role="group" aria-label="¿Vas al partido?">
-    ${[["si","Voy"],["no","No voy"],["duda","Duda"]].map(([k,l])=>`<button type="button" data-act="rsvp" data-pid="${esc(pid)}" data-jid="${esc(jid)}" data-v="${k}" aria-pressed="${v===k}">${l}</button>`).join("")}
+    ${[["si","Voy"],["no","No voy"],["duda","Duda"]].map(([k,l])=>`<button type="button" data-act="rsvp" data-pid="${esc(pid)}" data-jid="${esc(jid)}" data-v="${k}" aria-pressed="${v===k}" ${dis}>${l}</button>`).join("")}
   </div>`;
 }
 function tally(pid){ const c=counts(pid);
   return `<div class="tally"><span class="pill si">${c.si} van</span><span class="pill no">${c.no} no</span><span class="pill duda">${c.duda} duda</span><span class="pill">${c.sin} sin responder</span></div>`; }
-function mePicker(){
-  const r=roster(); if(!r.length) return "";
-  return `<label>¿Quién eres?<select id="me-select"><option value="">Elige tu nombre</option>${r.map(j=>`<option value="${esc(j.id)}" ${j.id===S.me?"selected":""}>${esc(j.dorsal?j.dorsal+" · ":"")}${esc(j.nombre)}</option>`).join("")}</select></label>`;
+function loginForm(){
+  return `<form class="login" data-form="login">
+    <p class="note">Entra con tu email y la contraseña del equipo para marcar tu asistencia.</p>
+    <div class="form">
+      <label>Email<input id="lg-email" name="email" type="email" autocomplete="email" required placeholder="tu@email.com"></label>
+      <label>Contraseña del equipo<input id="lg-clave" name="clave" type="password" autocomplete="current-password" required></label>
+    </div>
+    <div class="actions"><button class="btn" type="submit">Entrar</button></div>
+  </form>`;
+}
+function whoami(){
+  const me=S.jugadores.find(j=>j.id===S.me);
+  return `<p class="note">Has entrado como <strong>${esc(me?me.nombre:S.me)}</strong>${S.auth?.admin?" (puedes marcar a cualquiera)":""}. <button class="linkbtn" data-act="logout">Salir</button></p>`;
 }
 function banner(){ return S.error ? `<p class="banner">No se ha podido cargar la asistencia. Comprueba la conexión; lo reintentamos solos.</p>` : ""; }
 function loading(){ return `<div class="card empty"><strong>Cargando…</strong></div>`; }
@@ -262,7 +276,7 @@ function vProximo(){
     </section>
     <section class="card">
       <div class="row-between"><h2>¿Vienes?</h2>${tally(g.id)}</div>
-      ${me ? `<p class="note">Respondiendo como <strong>${esc(me.nombre)}</strong>. <button class="linkbtn" data-act="forget">No soy yo</button></p>${rsvpButtons(g.id, me.id)}` : mePicker()}
+      ${S.auth ? whoami()+(me?rsvpButtons(g.id, me.id):"") : loginForm()}
       ${g.notas?`<p class="note">${esc(g.notas)}</p>`:""}
     </section>`;
   }
@@ -357,7 +371,7 @@ function vAsistencia(){
   if(!g) body=`<div class="card empty"><strong>No hay partidos pendientes</strong></div>`;
   else body=`<section class="card">
       <div class="row-between"><div><h2>Jornada ${esc(g.jornada)}</h2><div style="font-weight:600;margin-top:2px">${esc(teams(g).join(" – "))}</div><div class="note">${esc(fmtDate(g.fecha,{weekday:"long",day:"numeric",month:"long"}))}${g.hora?" · "+esc(g.hora)+" h":""}</div></div>${tally(g.id)}</div>
-      ${S.me?"":mePicker()}
+      ${S.auth?whoami():loginForm()}
     </section>
     <div class="players">${list.map(j=>`<div class="player ${j.id===S.me?"me":""}">
       <div class="pname"><span class="dorsal">${esc(j.dorsal||"–")}</span><span class="t">${esc(j.nombre)}${j.id===S.me?' <span class="pill">tú</span>':""}</span></div>
@@ -372,15 +386,18 @@ function vPlantilla(){
   return `${banner()}<h2>Plantilla · ${r.length} jugadores</h2>
   <div class="players">${r.map(j=>`<div class="player ${j.id===S.me?"me":""}" style="grid-template-columns:1fr auto">
     <div class="pname"><span class="dorsal">${esc(j.dorsal||"–")}</span><span class="t">${esc(j.nombre)}</span></div>
-    ${j.id===S.me?`<span class="pill">tú</span>`:`<button class="linkbtn" data-act="setme" data-jid="${esc(j.id)}">Soy yo</button>`}
+    ${j.id===S.me?`<span class="pill">tú</span>`:""}
   </div>`).join("")}</div>
-  <p class="note">Elige «Soy yo» una vez y la app te recordará en este móvil.</p>`;
+  <p class="note">Para marcar tu asistencia, entra en Asistencia con tu email y la contraseña del equipo.</p>`;
 }
 
 function render(){
   const t=tab();
   document.querySelectorAll("nav a").forEach(a=>a.setAttribute("aria-current", a.dataset.tab===t?"page":"false"));
+  const keep={}; document.querySelectorAll("#app input[id]").forEach(el=>keep[el.id]=el.value); const fid=document.activeElement?.id;
   $("#app").innerHTML=({proximo:vProximo,calendario:vCalendario,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
+  for(const [id,v] of Object.entries(keep)){ const el=document.getElementById(id); if(el) el.value=v; }
+  if(fid){ const el=document.getElementById(fid); if(el&&el.tagName==="INPUT") el.focus(); }
 }
 
 /* ---------- datos ---------- */
@@ -389,7 +406,7 @@ async function load(){
   const d=window.DATOS;
   if(!d){ S.error=true; return render(); }
   if(!S.loaded){ Object.assign(S,{partidos:d.partidos||[],jugadores:d.jugadores||[],stats:d.stats||{},clasi:d.clasi||[],ajustes:d.ajustes||{},loaded:true});
-    if(S.me && !S.jugadores.some(j=>j.id===S.me)) setMe(null); render(); }
+     render(); }
   if(S.pending) return;
   try{
     const r=await fetch(API,{cache:"no-store"}); if(!r.ok) throw new Error(r.status);
@@ -398,17 +415,33 @@ async function load(){
   }catch(e){ S.error=true; }
   render();
 }
+function logout(){ S.auth=null; S.me=null; try{ localStorage.removeItem("kg_auth"); }catch(_){} render(); }
+async function login(f){
+  const email=f.email.value.trim().toLowerCase(), clave=f.clave.value;
+  const btn=f.querySelector("button[type=submit]"); btn.disabled=true;
+  try{
+    const r=await fetch("/api/acceso",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email,clave})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok) throw new Error(d.error||"No se ha podido entrar.");
+    S.auth={email,clave,jugador:d.jugador,admin:!!d.admin}; S.me=d.jugador;
+    try{ localStorage.setItem("kg_auth",JSON.stringify(S.auth)); }catch(_){}
+    const me=S.jugadores.find(j=>j.id===d.jugador); toast(`Hola, ${me?me.nombre:"crack"}`); render();
+  }catch(e){ toast(e.message); btn.disabled=false; }
+}
 async function setRsvp(pid,jid,v){
+  if(!canEdit(jid)) return;
   const prev=(S.asis[pid]||{})[jid]; const val= prev===v?null:v;
   S.asis[pid]={...(S.asis[pid]||{})}; if(val) S.asis[pid][jid]=val; else delete S.asis[pid][jid];
   render(); S.pending++;
   try{
-    const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({partido:pid,jugador:jid,respuesta:val})});
-    if(!r.ok) throw new Error(r.status);
+    const r=await fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:S.auth?.email,clave:S.auth?.clave,partido:pid,jugador:jid,respuesta:val})});
+    if(r.status===401){ logout(); throw new Error("Tu acceso ha caducado. Vuelve a entrar."); }
+    if(r.status===403) throw new Error("Solo puedes marcar tu propia asistencia.");
+    if(!r.ok) throw new Error("No se ha podido guardar. Inténtalo de nuevo.");
     toast(val?"Guardado":"Respuesta borrada");
   }catch(e){
     S.asis[pid]={...(S.asis[pid]||{})}; if(prev) S.asis[pid][jid]=prev; else delete S.asis[pid][jid];
-    render(); toast("No se ha podido guardar. Inténtalo de nuevo.");
+    render(); toast(e.message||"No se ha podido guardar. Inténtalo de nuevo.");
   }finally{ S.pending--; }
 }
 
@@ -418,13 +451,12 @@ document.addEventListener("click", e=>{
   if(act==="rsvp") return setRsvp(pid,jid,v);
   if(act==="sel"){ S.sel=pid; return render(); }
   if(act==="goasis"){ S.sel=pid; location.hash="asistencia"; return; }
-  if(act==="forget"){ setMe(null); return render(); }
-  if(act==="setme"){ setMe(jid); toast("Listo, ya sabemos quién eres."); return render(); }
+  if(act==="logout") return logout();
   if(act==="st-view"){ S.statView=v; return render(); }
   if(act==="st-sel"){ S.statSel=pid; return render(); }
   if(act==="st-sort"){ S.statSort=v; return render(); }
 });
-document.addEventListener("change", e=>{ if(e.target.id==="me-select"){ setMe(e.target.value); render(); } });
+document.addEventListener("submit", e=>{ const f=e.target.closest('form[data-form="login"]'); if(!f) return; e.preventDefault(); login(f); });
 addEventListener("hashchange", ()=>{ render(); window.scrollTo(0,0); });
 document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible") load(); });
 setInterval(()=>{ if(document.visibilityState==="visible") load(); }, 60000);
