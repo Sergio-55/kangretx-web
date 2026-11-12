@@ -230,7 +230,7 @@ window.DATOS = {
   {
    "id": "mikel-del-alamo",
    "dorsal": "11",
-   "nombre": "Mikel Del Álamo"
+   "nombre": "Maik del Páramo"
   },
   {
    "id": "mitxel",
