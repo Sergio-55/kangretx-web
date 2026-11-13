@@ -77,6 +77,14 @@ nav.tabs a.dot::after{content:"";position:absolute;top:6px;right:8px;width:8px;h
   main{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
   body .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
+/* Barras que se esconden al bajar y vuelven al subir */
+header{transition:top .28s ease}
+body.hide-bars header{top:calc(env(safe-area-inset-top,0px) - var(--hdr-h,240px) - 2px)}
+@media (max-width:719px){
+  nav.tabs{transition:transform .28s ease}
+  body.hide-bars nav.tabs{transform:translateY(calc(100% + 6px))}
+}
+@media (prefers-reduced-motion:reduce){ header,nav.tabs{transition:none} }
 .subnav{display:flex;gap:4px;background:var(--panel);padding:4px;border-radius:12px;justify-self:start;max-width:100%}
 .subnav a{font:600 15px var(--f-body);padding:8px 18px;border-radius:9px;color:var(--muted);text-decoration:none;white-space:nowrap}
 .subnav a[aria-current="page"]{background:var(--card);color:var(--brick);box-shadow:0 1px 2px rgba(0,0,0,.12)}
@@ -523,7 +531,26 @@ document.addEventListener("click", e=>{
   if(act==="st-sort"){ S.statSort=v; return render(); }
 });
 document.addEventListener("submit", e=>{ const f=e.target.closest('form[data-form="login"]'); if(!f) return; e.preventDefault(); login(f); });
-addEventListener("hashchange", ()=>{ render(); window.scrollTo(0,0); });
+/* ---------- ocultar barras al desplazar ---------- */
+(function(){
+  const hdr=document.querySelector("header"), B=document.body;
+  const setH=()=>document.documentElement.style.setProperty("--hdr-h",hdr.offsetHeight+"px");
+  setH(); addEventListener("resize",setH); addEventListener("load",setH);
+  let lastY=Math.max(0,scrollY), ticking=false;
+  addEventListener("scroll",()=>{
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(()=>{
+      const max=document.documentElement.scrollHeight-innerHeight;
+      const y=Math.min(Math.max(0,scrollY),Math.max(0,max)); const dy=y-lastY;
+      if(y<80){ B.classList.remove("hide-bars"); lastY=y; }
+      else if(dy>10){ B.classList.add("hide-bars"); lastY=y; }
+      else if(dy<-10){ B.classList.remove("hide-bars"); lastY=y; }
+      ticking=false;
+    });
+  },{passive:true});
+  addEventListener("focusin",e=>{ if(e.target.closest("header")) B.classList.remove("hide-bars"); });
+})();
+addEventListener("hashchange", ()=>{ document.body.classList.remove("hide-bars"); render(); window.scrollTo(0,0); });
 document.addEventListener("visibilitychange", ()=>{ if(document.visibilityState==="visible") load(); });
 setInterval(()=>{ if(document.visibilityState==="visible") load(); }, 60000);
 
