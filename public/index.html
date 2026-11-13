@@ -194,6 +194,9 @@ table.clasi{width:100%;border-collapse:collapse;font-variant-numeric:tabular-num
 .sponsor p{margin:0;font-family:var(--f-num);font-weight:600;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .sponsor .logo{background:#FFFFFF;border:1px solid var(--line);border-radius:12px;padding:6px 10px;display:block;width:190px}
 .sponsor img{display:block;width:100%;height:auto}
+a.logo{transition:transform .15s,box-shadow .15s}
+a.logo:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(43,22,18,.12)}
+a.logo:focus-visible{outline:2px solid var(--brick-2);outline-offset:2px}
 @media (max-width:520px){.crest{width:64px;height:64px}.sponsor .logo{width:124px;padding:4px 6px}.brand h1{font-size:21px}.brand p{display:none}}
 .login{display:grid;gap:10px}
 .news{display:grid;gap:16px}
@@ -222,7 +225,7 @@ a.ext{color:var(--brick-2);font-weight:600}
       </div>
       <div class="sponsor" aria-label="Patrocinador">
         <p>Patrocina</p>
-        <span class="logo"><img src="patrocinador.png" alt="Japanese Head Spa"></span>
+        <a class="logo" href="https://www.instagram.com/japaneseheadspa.vitoriagasteiz/" target="_blank" rel="noopener" title="Japanese Head Spa en Instagram"><img src="patrocinador.png" alt="Japanese Head Spa (abre su Instagram)"></a>
       </div>
     </div>
     <nav class="tabs" aria-label="Secciones">
