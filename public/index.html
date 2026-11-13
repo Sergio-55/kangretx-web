@@ -57,15 +57,30 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 :root[data-theme="dark"] .crest img{filter:brightness(1.9) saturate(.85)}
 .brand h1{font-family:var(--f-display);font-weight:900;font-variation-settings:"SOFT" 100,"WONK" 1;font-size:clamp(24px,6vw,32px);line-height:1;margin:0;color:var(--brick);letter-spacing:.01em}
 .brand p{margin:4px 0 0;font-size:13px;color:var(--muted)}
-nav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:0 2px}
-nav a{flex:1 1 auto;text-align:center;padding:10px 6px;font-family:var(--f-num);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}
-@media (max-width:640px){
-  nav{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-  nav a{padding:9px 2px;font-size:13px;letter-spacing:.02em}
+/* Navegación: barra inferior tipo app en móvil, barra con iconos bajo la cabecera en ordenador */
+nav.tabs{display:flex;gap:6px;padding-block:6px 10px}
+nav.tabs a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;font-family:var(--f-num);font-weight:600;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);text-decoration:none;position:relative;-webkit-tap-highlight-color:transparent;transition:background-color .15s,color .15s}
+nav.tabs a:hover{color:var(--ink);background:var(--panel)}
+nav.tabs a[aria-current="page"]{color:var(--on-brick);background:var(--brick)}
+nav.tabs svg{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs a.dot::after{content:"";position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--duda);box-shadow:0 0 0 2px var(--bg)}
+@media (max-width:719px){
+  nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:15;display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+    padding:6px max(4px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(4px,env(safe-area-inset-left,0px));
+    background:var(--card);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(43,22,18,.08)}
+  nav.tabs a{flex-direction:column;gap:3px;padding:6px 2px;border-radius:12px;font-size:11.5px;letter-spacing:.03em;min-height:52px;justify-content:center}
+  nav.tabs a:hover{background:transparent}
+  nav.tabs a[aria-current="page"]{background:transparent;color:var(--brick)}
+  nav.tabs a[aria-current="page"] svg{background:var(--brick);color:var(--on-brick);border-radius:999px;padding:3px 14px;width:52px;height:28px;stroke-width:2}
+  nav.tabs svg{width:24px;height:24px;padding:2px 0}
+  nav.tabs a.dot::after{top:4px;right:calc(50% - 22px)}
+  main{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+  body .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
-@media (max-width:360px){ nav a{font-size:12px;letter-spacing:0} }
-nav a[aria-current="page"]{color:var(--brick);border-bottom-color:var(--brick)}
-nav a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--brick-2);outline-offset:2px}
+.subnav{display:flex;gap:4px;background:var(--panel);padding:4px;border-radius:12px;justify-self:start;max-width:100%}
+.subnav a{font:600 15px var(--f-body);padding:8px 18px;border-radius:9px;color:var(--muted);text-decoration:none;white-space:nowrap}
+.subnav a[aria-current="page"]{background:var(--card);color:var(--brick);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+nav a:focus-visible,.subnav a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--brick-2);outline-offset:2px}
 main{padding-block:20px 48px;display:grid;gap:20px}
 h2{font-family:var(--f-num);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:14px;color:var(--muted);margin:0}
 .note{font-size:14px;color:var(--muted);margin:0}
@@ -202,14 +217,12 @@ a.ext{color:var(--brick-2);font-weight:600}
         <span class="logo"><img src="patrocinador.png" alt="Japanese Head Spa"></span>
       </div>
     </div>
-    <nav aria-label="Secciones">
-      <a href="#proximo" data-tab="proximo">Próximo</a>
-      <a href="#noticias" data-tab="noticias">Noticias</a>
-      <a href="#calendario" data-tab="calendario">Calendario</a>
-      <a href="#clasificacion" data-tab="clasificacion">Clasificación</a>
-      <a href="#estadisticas" data-tab="estadisticas">Estadísticas</a>
-      <a href="#asistencia" data-tab="asistencia">Asistencia</a>
-      <a href="#plantilla" data-tab="plantilla">Plantilla</a>
+    <nav class="tabs" aria-label="Secciones">
+      <a href="#proximo" data-group="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3v18M5.7 5.7c3.1 3.4 3.1 9.2 0 12.6M18.3 5.7c-3.1 3.4-3.1 9.2 0 12.6"/></svg><span>Inicio</span></a>
+      <a href="#noticias" data-group="noticias"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h12.5v14H6.2A2.2 2.2 0 0 1 4 16.8z"/><path d="M16.5 8.5H20v8.3a2.2 2.2 0 0 1-2.2 2.2"/><path d="M7.2 9h6.1M7.2 12.2h6.1M7.2 15.4h3.6"/></svg><span>Noticias</span></a>
+      <a href="#calendario" data-group="partidos"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.2"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M14 14h2"/></svg><span>Partidos</span></a>
+      <a href="#asistencia" data-group="asistencia"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.4l2.8 2.8L16.2 9.6"/></svg><span>Asistencia</span></a>
+      <a href="#estadisticas" data-group="equipo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3.3 2.8-5.2 5.5-5.2s4.9 1.9 5.5 5.2"/><circle cx="16.8" cy="9.6" r="2.5"/><path d="M15.8 14.4c2.5-.3 4.4 1.4 4.8 5"/></svg><span>Equipo</span></a>
     </nav>
   </div>
 </header>
@@ -240,6 +253,14 @@ const fmt1 = n => (Math.round(n*10)/10).toLocaleString("es-ES",{minimumFractionD
 const isUs = n => /kangretx/i.test(n||"");
 
 function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>t.hidden=true,2600); }
+const GROUPS={inicio:["proximo"],noticias:["noticias"],partidos:["calendario","clasificacion"],asistencia:["asistencia"],equipo:["estadisticas","plantilla"]};
+const SUBLABEL={calendario:"Calendario",clasificacion:"Clasificación",estadisticas:"Estadísticas",plantilla:"Plantilla"};
+const groupOf=t=>Object.keys(GROUPS).find(g=>GROUPS[g].includes(t));
+const lastSub={};
+function subnav(t){
+  const subs=GROUPS[groupOf(t)]; if(subs.length<2) return "";
+  return `<nav class="subnav" aria-label="Apartado">${subs.map(x=>`<a href="#${x}" ${x===t?'aria-current="page"':""}>${SUBLABEL[x]}</a>`).join("")}</nav>`;
+}
 function tab(){ const h=location.hash.slice(1); return tabs.includes(h)?h:"proximo"; }
 function setMe(id){ S.me=id||null; try{ id?localStorage.setItem("kg_me",id):localStorage.removeItem("kg_me"); }catch(_){} }
 
@@ -433,9 +454,14 @@ function vPlantilla(){
 
 function render(){
   const t=tab();
-  document.querySelectorAll("nav a").forEach(a=>a.setAttribute("aria-current", a.dataset.tab===t?"page":"false"));
+  const grp=groupOf(t); lastSub[grp]=t;
+  const g0=S.loaded?nextGame():null; const pend=!!(S.auth&&g0&&!(S.asis[g0.id]||{})[S.me]);
+  document.querySelectorAll("nav.tabs a").forEach(a=>{ const k=a.dataset.group;
+    a.setAttribute("href","#"+(lastSub[k]||GROUPS[k][0]));
+    if(k===grp) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+    a.classList.toggle("dot", k==="asistencia" && pend); });
   const keep={}; document.querySelectorAll("#app input[id]").forEach(el=>keep[el.id]=el.value); const fid=document.activeElement?.id;
-  $("#app").innerHTML=({proximo:vProximo,noticias:vNoticias,calendario:vCalendario,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
+  $("#app").innerHTML=subnav(t)+({proximo:vProximo,noticias:vNoticias,calendario:vCalendario,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
   for(const [id,v] of Object.entries(keep)){ const el=document.getElementById(id); if(el) el.value=v; }
   if(fid){ const el=document.getElementById(fid); if(el&&el.tagName==="INPUT") el.focus(); }
 }
