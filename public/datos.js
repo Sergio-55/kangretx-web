@@ -1,7 +1,7 @@
 // Datos de la web del Kangretx Old Stars.
 // Para actualizar: cambia estos datos y vuelve a subir la carpeta a Netlify.
 window.DATOS = {
- "actualizado": "2026-11-12",
+ "actualizado": "2026-11-14",
  "partidos": [
   {
    "id": "j01",
@@ -45,13 +45,13 @@ window.DATOS = {
   {
    "id": "j04",
    "descanso": false,
-   "ellos": null,
+   "ellos": 38,
    "fecha": "2026-11-14",
    "hora": "20:00",
    "jornada": 4,
    "local": false,
    "lugar": "Pabellón Corazonistas · Fray Francisco 21, Vitoria",
-   "nos": null,
+   "nos": 53,
    "notas": "",
    "rival": "BAIGENE CORAZONISTAS"
   },
@@ -378,75 +378,133 @@ window.DATOS = {
     "tl": 0,
     "tli": 2
    }
+  },
+  "j04": {
+   "gaizka": {
+    "t2": 0,
+    "t3": 0,
+    "tl": 0,
+    "tli": 0,
+    "f": 5
+   },
+   "andres": {
+    "t2": 2,
+    "t3": 1,
+    "tl": 3,
+    "tli": 4,
+    "f": 4
+   },
+   "manute": {
+    "t2": 1,
+    "t3": 0,
+    "tl": 0,
+    "tli": 1,
+    "f": 3
+   },
+   "mario": {
+    "t2": 0,
+    "t3": 0,
+    "tl": 4,
+    "tli": 4,
+    "f": 3
+   },
+   "mitxel": {
+    "t2": 3,
+    "t3": 1,
+    "tl": 2,
+    "tli": 2,
+    "f": 3
+   },
+   "casas": {
+    "t2": 0,
+    "t3": 1,
+    "tl": 0,
+    "tli": 0,
+    "f": 2
+   },
+   "josu": {
+    "t2": 2,
+    "t3": 0,
+    "tl": 1,
+    "tli": 4,
+    "f": 2
+   },
+   "magoo": {
+    "t2": 4,
+    "t3": 2,
+    "tl": 4,
+    "tli": 6,
+    "f": 2
+   }
   }
  },
  "clasi": [
   {
    "equipo": "BAIGENE CORAZONISTAS",
+   "j": 4,
    "g": 3,
-   "j": 3,
-   "p": 0,
-   "pts": 6,
-   "tc": 123,
-   "tf": 209
+   "p": 1,
+   "tf": 247,
+   "tc": 176,
+   "pts": 7
   },
   {
    "equipo": "C.B. MAKOAK",
-   "g": 2,
    "j": 3,
+   "g": 2,
    "p": 1,
-   "pts": 5,
+   "tf": 190,
    "tc": 144,
-   "tf": 190
-  },
-  {
-   "equipo": "MENDEBALDEA",
-   "g": 2,
-   "j": 2,
-   "p": 0,
-   "pts": 4,
-   "tc": 108,
-   "tf": 124
-  },
-  {
-   "equipo": "CARMELITAS-BASABIDE",
-   "g": 1,
-   "j": 3,
-   "p": 2,
-   "pts": 4,
-   "tc": 212,
-   "tf": 166
+   "pts": 5
   },
   {
    "equipo": "KANGRETX OLD STARS",
-   "g": 1,
-   "j": 2,
+   "j": 3,
+   "g": 2,
    "p": 1,
-   "pts": 3,
-   "tc": 124,
-   "tf": 114
+   "tf": 167,
+   "tc": 162,
+   "pts": 5
+  },
+  {
+   "equipo": "MENDEBALDEA",
+   "j": 2,
+   "g": 2,
+   "p": 0,
+   "tf": 124,
+   "tc": 108,
+   "pts": 4
+  },
+  {
+   "equipo": "CARMELITAS-BASABIDE",
+   "j": 3,
+   "g": 1,
+   "p": 2,
+   "tf": 166,
+   "tc": 212,
+   "pts": 4
   },
   {
    "equipo": "OCCIDENT ATELARI LAKUA BASKET",
-   "g": 0,
    "j": 3,
+   "g": 0,
    "p": 3,
-   "pts": 3,
+   "tf": 124,
    "tc": 185,
-   "tf": 124
+   "pts": 3
   },
   {
    "equipo": "ATZURRA SUGOIAK",
-   "g": 0,
    "j": 2,
+   "g": 0,
    "p": 2,
-   "pts": 2,
+   "tf": 97,
    "tc": 128,
-   "tf": 97
+   "pts": 2
   }
  ],
  "ajustes": {
-  "clasificacion_jornada": "3",
+  "clasificacion_jornada": "4",
   "web_federacion": "https://www.basketaraba.com/es/fab-online/calendario-y-resultados-federacion-alavesa-de-baloncesto?grupo=1003&seccion=2"
  },
  "noticias": [
@@ -492,6 +550,21 @@ window.DATOS = {
     "El apoyo llega en el momento justo. Como ya avanzó Mitxel Cuesta, el equipo está en el mercado buscando un 5, y la ayuda de Adrián será clave para encontrar a ese pívot que domine la zona y nos dé los rebotes que se nos escaparon contra Makoak.",
     "Además, la plantilla ya tiene claro dónde recuperarse después de cada partido. Si las piernas no responden, al menos la cabeza llegará relajada.",
     "Gracias, Adrián. ¡Aúpa Kangretx!"
+   ]
+  },
+  {
+   "id": "flu-game-corazonistas",
+   "fecha": "2026-11-14",
+   "seccion": "Crónica",
+   "titular": "El «flu game» de Mitxel: el Kangretx tumba al líder en Corazonistas (38–53)",
+   "entradilla": "Con fiebre y avisando de que podía vomitar en cualquier momento, Mitxel Cuesta firmó 11 puntos y el equipo le endosó al invicto Baigene su primera derrota. Nunca subestimes el corazón de un campeón.",
+   "cuerpo": [
+    "Junio de 1997, finales de la NBA, quinto partido en Utah: Michael Jordan juega enfermo, apenas se tiene en pie y acaba con 38 puntos. Desde entonces, el baloncesto lo llama el «flu game». Noviembre de 2026, pabellón Corazonistas, sábado a las ocho de la tarde: Mitxel Cuesta llega con fiebre y escribe su propia versión.",
+    "En un parón del partido, entre jadeos, soltó la frase de la noche: «Que no te extrañe si me ves vomitar». No vomitó. Lo que hizo fue anotar 11 puntos (3 de dos, un triple y un 2 de 2 desde la línea) y aguantar en pista como si tuviera 20 años y 36,5 de temperatura.",
+    "El Kangretx salió a morder: 8–21 en el primer cuarto y 22–29 al descanso. El tercer cuarto fue un monólogo, con un parcial de 3–17 que dejó el marcador en 25–46 y al líder sin respuesta. El último cuarto sirvió para administrar la renta y celebrar.",
+    "Magoo volvió a ser el máximo anotador con 18 puntos y dos triples. René puso 10, Josu 5 y Mario fue un reloj desde el tiro libre: 4 de 4. Gaizka lo dejó todo en defensa y terminó eliminado con cinco faltas. Baigene Corazonistas, que llegaba con tres victorias en tres partidos, se lleva su primera derrota de la temporada.",
+    "Con esta victoria, el Kangretx suma 2–1 y sube al tercer puesto. La próxima jornada, en casa contra Mendebaldea. Y a Mitxel, que alguien le lleve un caldo.",
+    "Nunca subestimes el corazón de un campeón."
    ]
   }
  ]
