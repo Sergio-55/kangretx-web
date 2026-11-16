@@ -1,13 +1,12 @@
 # Kangretx Old Stars · Web del equipo
 
-Web: https://kangretx.pages.dev (Cloudflare Pages)
+Web: Cloudflare Workers (Worker `kangretx`, configuración en `wrangler.jsonc`)
 
 - `public/` — la web. `public/datos.js` tiene calendario, resultados del grupo, clasificación, estadísticas, plantilla y noticias.
-- `functions/api/` + `lib/asistencia.js` — asistencia con email + contraseña del equipo, guardada en Cloudflare D1.
+- `worker/index.js` + `lib/asistencia.js` — sirve la web y la asistencia (email + contraseña del equipo), guardada en Cloudflare D1.
 
-Configuración en Cloudflare Pages:
-- Build command: (vacío) · Build output directory: `public`
-- Variables/secretos: `CLAVE_EQUIPO`, `JUGADORES_EMAILS`, `ADMIN_EMAILS`
-- Binding D1: `DB`
+Configuración en Cloudflare:
+- Secretos del Worker: `CLAVE_EQUIPO`, `JUGADORES_EMAILS`, `ADMIN_EMAILS`
+- Base de datos D1 `kangretx` (enlazada como `DB` en `wrangler.jsonc`)
 
 Para actualizar resultados o estadísticas: edita `public/datos.js` y haz commit; Cloudflare publica solo.

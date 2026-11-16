@@ -1,0 +1,19 @@
+{
+  // Web del Kangretx Old Stars en Cloudflare Workers
+  "name": "kangretx",
+  "main": "worker/index.js",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kangretx",
+      "database_id": "5b5832f5-4345-4c9f-8206-7b3a2e8b06f6"
+    }
+  ],
+  // Conserva la contraseña y los emails guardados en el panel de Cloudflare
+  "keep_vars": true
+}
