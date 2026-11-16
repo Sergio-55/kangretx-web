@@ -85,8 +85,21 @@ body.hide-bars header{top:calc(env(safe-area-inset-top,0px) - var(--hdr-h,240px)
   body.hide-bars nav.tabs{transform:translateY(calc(100% + 6px))}
 }
 @media (prefers-reduced-motion:reduce){ header,nav.tabs{transition:none} }
-.subnav{display:flex;gap:4px;background:var(--panel);padding:4px;border-radius:12px;justify-self:start;max-width:100%}
-.subnav a{font:600 15px var(--f-body);padding:8px 18px;border-radius:9px;color:var(--muted);text-decoration:none;white-space:nowrap}
+.jr-list{display:grid;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.jr{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;padding:11px 12px;border-top:1px solid var(--line);font-size:15px}
+.jr:first-child{border-top:0}
+.jr-t{min-width:0;overflow-wrap:anywhere;color:var(--muted)}
+.jr-t.r{text-align:right}
+.jr-t.win{color:var(--ink);font-weight:600}
+.jr-score{font-family:var(--f-num);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;display:flex;gap:6px;white-space:nowrap}
+.jr-score span{color:var(--muted);font-weight:500}
+.jr-when{font-size:13px;color:var(--muted);white-space:nowrap;text-align:center}
+.jr.us{background:var(--panel);box-shadow:inset 4px 0 0 var(--brick)}
+.jr.us .jr-t{color:var(--ink)}
+.jr.us .jr-t.win{color:var(--brick)}
+.subnav{display:flex;gap:4px;background:var(--panel);padding:4px;border-radius:12px;justify-self:start;max-width:100%;overflow-x:auto;scrollbar-width:none}
+@media (max-width:420px){.subnav{justify-self:stretch}.subnav a{flex:1 1 auto;text-align:center;padding:8px 8px;font-size:14px}}
+.subnav a{font:600 15px var(--f-body);padding:8px 14px;border-radius:9px;color:var(--muted);text-decoration:none;white-space:nowrap}
 .subnav a[aria-current="page"]{background:var(--card);color:var(--brick);box-shadow:0 1px 2px rgba(0,0,0,.12)}
 nav a:focus-visible,.subnav a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--brick-2);outline-offset:2px}
 main{padding-block:20px 48px;display:grid;gap:20px}
@@ -248,7 +261,7 @@ const TEAM = "Kangretx Old Stars";
 const CLASI_URL = "https://www.basketaraba.com/es/fab-online/clasificaciones-federacion-alavesa-de-baloncesto?grupo=1003&seccion=0";
 const S = {loaded:false, error:false, partidos:[], jugadores:[], asis:{}, stats:{}, clasi:[], ajustes:{}, hoy:null,
   me:null, sel:null, statView:"partido", statSel:null, statSort:"pts", pending:0};
-const tabs = ["proximo","noticias","calendario","clasificacion","estadisticas","asistencia","plantilla"];
+const tabs = ["proximo","noticias","calendario","jornadas","clasificacion","estadisticas","asistencia","plantilla"];
 S.auth=null;
 try{ S.auth = JSON.parse(localStorage.getItem("kg_auth")||"null"); }catch(e){}
 S.me = S.auth?.jugador || null;
@@ -264,8 +277,8 @@ const fmt1 = n => (Math.round(n*10)/10).toLocaleString("es-ES",{minimumFractionD
 const isUs = n => /kangretx/i.test(n||"");
 
 function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toast.t); toast.t=setTimeout(()=>t.hidden=true,2600); }
-const GROUPS={inicio:["proximo"],noticias:["noticias"],partidos:["calendario","clasificacion"],asistencia:["asistencia"],equipo:["estadisticas","plantilla"]};
-const SUBLABEL={calendario:"Calendario",clasificacion:"Clasificación",estadisticas:"Estadísticas",plantilla:"Plantilla"};
+const GROUPS={inicio:["proximo"],noticias:["noticias"],partidos:["calendario","jornadas","clasificacion"],asistencia:["asistencia"],equipo:["estadisticas","plantilla"]};
+const SUBLABEL={calendario:"Kangretx",jornadas:"Jornadas",clasificacion:"Clasificación",estadisticas:"Estadísticas",plantilla:"Plantilla"};
 const groupOf=t=>Object.keys(GROUPS).find(g=>GROUPS[g].includes(t));
 const lastSub={};
 function subnav(t){
@@ -364,6 +377,31 @@ function vNoticias(){
     ${x.entradilla?`<p class="entradilla">${esc(x.entradilla)}</p>`:""}
     ${(x.cuerpo||[]).map(par=>`<p>${esc(par)}</p>`).join("")}
   </article>`).join("")}</div>`;
+}
+
+function vJornadas(){
+  if(!S.loaded) return banner()+loading();
+  const G=window.DATOS?.grupo||[]; if(!G.length) return `<div class="card empty"><strong>Aún no hay jornadas</strong></div>`;
+  const jug=x=>x.pl!=null&&x.pv!=null;
+  if(!S.jorSel){ const last=[...G].reverse().find(g=>g.partidos.some(jug)); S.jorSel=(last||G[0]).jornada; }
+  const g=G.find(x=>x.jornada===S.jorSel)||G[0];
+  const sig=G.find(x=>x.partidos.some(p=>!jug(p)));
+  const picks=G.map(x=>`<button type="button" data-act="jor" data-v="${x.jornada}" aria-pressed="${x.jornada===g.jornada}"><b>J${x.jornada}</b>${esc(fmtDate(x.fecha,{day:"numeric",month:"short"}))}${sig&&sig.jornada===x.jornada?" · próxima":""}</button>`).join("");
+  const name=t=>esc(titleCase(t));
+  const rows=g.partidos.map(x=>{ const us=isUs(x.local)||isUs(x.visitante); const done=jug(x);
+    const wl=done?(+x.pl>+x.pv?"L":"V"):null;
+    const mid=done?`<span class="jr-score">${esc(x.pl)}<span>–</span>${esc(x.pv)}</span>`:`<span class="jr-when">${x.fecha?esc(fmtDate(x.fecha,{weekday:"short",day:"numeric"})):""}${x.hora?" · "+esc(x.hora):""}${!x.fecha&&!x.hora?"Por jugar":""}</span>`;
+    return `<div class="jr ${us?"us":""}">
+      <span class="jr-t ${done&&wl==="L"?"win":""}">${name(x.local)}</span>${mid}<span class="jr-t r ${done&&wl==="V"?"win":""}">${name(x.visitante)}</span>
+    </div>`; }).join("");
+  return `<h2>Jornadas del grupo</h2>
+  <div class="gamepick">${picks}</div>
+  <section class="card">
+    <div class="row-between"><h2>Jornada ${g.jornada}</h2><span class="pill">${esc(fmtDate(g.fecha,{day:"numeric",month:"long"}))}</span></div>
+    <div class="jr-list">${rows}</div>
+    ${g.descansa?`<p class="note">Descansa: ${name(g.descansa)}</p>`:""}
+  </section>
+  <p class="note">Nuestro partido aparece destacado. Las fechas sin hora son las previstas por la federación.</p>`;
 }
 
 function vCalendario(){
@@ -472,7 +510,7 @@ function render(){
     if(k===grp) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
     a.classList.toggle("dot", k==="asistencia" && pend); });
   const keep={}; document.querySelectorAll("#app input[id]").forEach(el=>keep[el.id]=el.value); const fid=document.activeElement?.id;
-  $("#app").innerHTML=subnav(t)+({proximo:vProximo,noticias:vNoticias,calendario:vCalendario,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
+  $("#app").innerHTML=subnav(t)+({proximo:vProximo,noticias:vNoticias,calendario:vCalendario,jornadas:vJornadas,clasificacion:vClasificacion,estadisticas:vEstadisticas,asistencia:vAsistencia,plantilla:vPlantilla})[t]();
   for(const [id,v] of Object.entries(keep)){ const el=document.getElementById(id); if(el) el.value=v; }
   if(fid){ const el=document.getElementById(fid); if(el&&el.tagName==="INPUT") el.focus(); }
 }
@@ -529,6 +567,7 @@ document.addEventListener("click", e=>{
   if(act==="sel"){ S.sel=pid; return render(); }
   if(act==="goasis"){ S.sel=pid; location.hash="asistencia"; return; }
   if(act==="logout") return logout();
+  if(act==="jor"){ S.jorSel=+v; return render(); }
   if(act==="st-view"){ S.statView=v; return render(); }
   if(act==="st-sel"){ S.statSel=pid; return render(); }
   if(act==="st-sort"){ S.statSort=v; return render(); }

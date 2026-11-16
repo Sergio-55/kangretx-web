@@ -567,5 +567,363 @@ window.DATOS = {
     "Nunca subestimes el corazón de un campeón."
    ]
   }
+ ],
+ "grupo": [
+  {
+   "jornada": 1,
+   "fecha": "2026-10-18",
+   "descansa": "MENDEBALDEA",
+   "partidos": [
+    {
+     "local": "CARMELITAS-BASABIDE",
+     "visitante": "KANGRETX OLD STARS",
+     "pl": 61,
+     "pv": 65
+    },
+    {
+     "local": "OCCIDENT ATELARI LAKUA BASKET",
+     "visitante": "C.B. MAKOAK",
+     "pl": 35,
+     "pv": 71
+    },
+    {
+     "local": "ATZURRA SUGOIAK",
+     "visitante": "BAIGENE CORAZONISTAS",
+     "pl": 43,
+     "pv": 72
+    }
+   ]
+  },
+  {
+   "jornada": 2,
+   "fecha": "2026-10-25",
+   "descansa": "KANGRETX OLD STARS",
+   "partidos": [
+    {
+     "local": "MENDEBALDEA",
+     "visitante": "ATZURRA SUGOIAK",
+     "pl": 56,
+     "pv": 54
+    },
+    {
+     "local": "BAIGENE CORAZONISTAS",
+     "visitante": "OCCIDENT ATELARI LAKUA BASKET",
+     "pl": 46,
+     "pv": 35
+    },
+    {
+     "local": "C.B. MAKOAK",
+     "visitante": "CARMELITAS-BASABIDE",
+     "pl": 56,
+     "pv": 60
+    }
+   ]
+  },
+  {
+   "jornada": 3,
+   "fecha": "2026-11-08",
+   "descansa": "ATZURRA SUGOIAK",
+   "partidos": [
+    {
+     "local": "KANGRETX OLD STARS",
+     "visitante": "C.B. MAKOAK",
+     "pl": 49,
+     "pv": 63
+    },
+    {
+     "local": "CARMELITAS-BASABIDE",
+     "visitante": "BAIGENE CORAZONISTAS",
+     "pl": 45,
+     "pv": 91
+    },
+    {
+     "local": "OCCIDENT ATELARI LAKUA BASKET",
+     "visitante": "MENDEBALDEA",
+     "pl": 54,
+     "pv": 68
+    }
+   ]
+  },
+  {
+   "jornada": 4,
+   "fecha": "2026-11-15",
+   "descansa": "C.B. MAKOAK",
+   "partidos": [
+    {
+     "local": "BAIGENE CORAZONISTAS",
+     "visitante": "KANGRETX OLD STARS",
+     "pl": 38,
+     "pv": 53
+    },
+    {
+     "local": "ATZURRA SUGOIAK",
+     "visitante": "OCCIDENT ATELARI LAKUA BASKET",
+     "pl": 60,
+     "pv": 44
+    },
+    {
+     "local": "MENDEBALDEA",
+     "visitante": "CARMELITAS-BASABIDE",
+     "pl": 73,
+     "pv": 51
+    }
+   ]
+  },
+  {
+   "jornada": 5,
+   "fecha": "2026-11-22",
+   "descansa": "OCCIDENT ATELARI LAKUA BASKET",
+   "partidos": [
+    {
+     "local": "C.B. MAKOAK",
+     "visitante": "BAIGENE CORAZONISTAS",
+     "pl": null,
+     "pv": null,
+     "fecha": "2026-11-21",
+     "hora": "17:00"
+    },
+    {
+     "local": "KANGRETX OLD STARS",
+     "visitante": "MENDEBALDEA",
+     "pl": null,
+     "pv": null,
+     "fecha": "2026-11-21",
+     "hora": "18:45"
+    },
+    {
+     "local": "CARMELITAS-BASABIDE",
+     "visitante": "ATZURRA SUGOIAK",
+     "pl": null,
+     "pv": null,
+     "fecha": "2026-11-21",
+     "hora": "18:30"
+    }
+   ]
+  },
+  {
+   "jornada": 6,
+   "fecha": "2026-11-29",
+   "descansa": "BAIGENE CORAZONISTAS",
+   "partidos": [
+    {
+     "local": "ATZURRA SUGOIAK",
+     "visitante": "KANGRETX OLD STARS",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "MENDEBALDEA",
+     "visitante": "C.B. MAKOAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "OCCIDENT ATELARI LAKUA BASKET",
+     "visitante": "CARMELITAS-BASABIDE",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 7,
+   "fecha": "2026-12-13",
+   "descansa": "CARMELITAS-BASABIDE",
+   "partidos": [
+    {
+     "local": "BAIGENE CORAZONISTAS",
+     "visitante": "MENDEBALDEA",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "C.B. MAKOAK",
+     "visitante": "ATZURRA SUGOIAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "KANGRETX OLD STARS",
+     "visitante": "OCCIDENT ATELARI LAKUA BASKET",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 8,
+   "fecha": "2026-12-20",
+   "descansa": "MENDEBALDEA",
+   "partidos": [
+    {
+     "local": "BAIGENE CORAZONISTAS",
+     "visitante": "ATZURRA SUGOIAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "C.B. MAKOAK",
+     "visitante": "OCCIDENT ATELARI LAKUA BASKET",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "KANGRETX OLD STARS",
+     "visitante": "CARMELITAS-BASABIDE",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 9,
+   "fecha": "2027-01-10",
+   "descansa": "KANGRETX OLD STARS",
+   "partidos": [
+    {
+     "local": "CARMELITAS-BASABIDE",
+     "visitante": "C.B. MAKOAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "OCCIDENT ATELARI LAKUA BASKET",
+     "visitante": "BAIGENE CORAZONISTAS",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "ATZURRA SUGOIAK",
+     "visitante": "MENDEBALDEA",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 10,
+   "fecha": "2027-01-24",
+   "descansa": "ATZURRA SUGOIAK",
+   "partidos": [
+    {
+     "local": "C.B. MAKOAK",
+     "visitante": "KANGRETX OLD STARS",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "MENDEBALDEA",
+     "visitante": "OCCIDENT ATELARI LAKUA BASKET",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "BAIGENE CORAZONISTAS",
+     "visitante": "CARMELITAS-BASABIDE",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 11,
+   "fecha": "2027-01-31",
+   "descansa": "C.B. MAKOAK",
+   "partidos": [
+    {
+     "local": "KANGRETX OLD STARS",
+     "visitante": "BAIGENE CORAZONISTAS",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "CARMELITAS-BASABIDE",
+     "visitante": "MENDEBALDEA",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "OCCIDENT ATELARI LAKUA BASKET",
+     "visitante": "ATZURRA SUGOIAK",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 12,
+   "fecha": "2027-02-07",
+   "descansa": "OCCIDENT ATELARI LAKUA BASKET",
+   "partidos": [
+    {
+     "local": "MENDEBALDEA",
+     "visitante": "KANGRETX OLD STARS",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "BAIGENE CORAZONISTAS",
+     "visitante": "C.B. MAKOAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "ATZURRA SUGOIAK",
+     "visitante": "CARMELITAS-BASABIDE",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 13,
+   "fecha": "2027-02-14",
+   "descansa": "BAIGENE CORAZONISTAS",
+   "partidos": [
+    {
+     "local": "C.B. MAKOAK",
+     "visitante": "MENDEBALDEA",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "KANGRETX OLD STARS",
+     "visitante": "ATZURRA SUGOIAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "CARMELITAS-BASABIDE",
+     "visitante": "OCCIDENT ATELARI LAKUA BASKET",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  },
+  {
+   "jornada": 14,
+   "fecha": "2027-02-21",
+   "descansa": "CARMELITAS-BASABIDE",
+   "partidos": [
+    {
+     "local": "OCCIDENT ATELARI LAKUA BASKET",
+     "visitante": "KANGRETX OLD STARS",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "ATZURRA SUGOIAK",
+     "visitante": "C.B. MAKOAK",
+     "pl": null,
+     "pv": null
+    },
+    {
+     "local": "MENDEBALDEA",
+     "visitante": "BAIGENE CORAZONISTAS",
+     "pl": null,
+     "pv": null
+    }
+   ]
+  }
  ]
 };
