@@ -1,8 +1,13 @@
 # Kangretx Old Stars · Web del equipo
 
-- `public/` — la web (index.html, datos.js con calendario, clasificación, estadísticas y plantilla).
-- `netlify/functions/asistencia.mts` — guarda la asistencia en Netlify Blobs (`/api/asistencia`).
+Web: https://kangretx.pages.dev (Cloudflare Pages)
 
-Para actualizar resultados o estadísticas: edita `public/datos.js` y haz commit; Netlify publica solo.
+- `public/` — la web. `public/datos.js` tiene calendario, resultados del grupo, clasificación, estadísticas, plantilla y noticias.
+- `functions/api/` + `lib/asistencia.js` — asistencia con email + contraseña del equipo, guardada en Cloudflare D1.
 
-Web: https://kangretx.netlify.app
+Configuración en Cloudflare Pages:
+- Build command: (vacío) · Build output directory: `public`
+- Variables/secretos: `CLAVE_EQUIPO`, `JUGADORES_EMAILS`, `ADMIN_EMAILS`
+- Binding D1: `DB`
+
+Para actualizar resultados o estadísticas: edita `public/datos.js` y haz commit; Cloudflare publica solo.
