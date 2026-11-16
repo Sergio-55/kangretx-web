@@ -1,7 +1,7 @@
 // Datos de la web del Kangretx Old Stars.
 // Para actualizar: cambia estos datos y vuelve a subir la carpeta a Netlify.
 window.DATOS = {
- "actualizado": "2026-11-14",
+ "actualizado": "2026-11-16",
  "partidos": [
   {
    "id": "j01",
@@ -59,11 +59,11 @@ window.DATOS = {
    "id": "j05",
    "descanso": false,
    "ellos": null,
-   "fecha": "2026-11-22",
-   "hora": "",
+   "fecha": "2026-11-21",
+   "hora": "18:45",
    "jornada": 5,
    "local": true,
-   "lugar": "",
+   "lugar": "Polideportivo L.0.3. · Sansomendi, Vitoria",
    "nos": null,
    "notas": "",
    "rival": "MENDEBALDEA"
@@ -449,6 +449,15 @@ window.DATOS = {
    "pts": 7
   },
   {
+   "equipo": "MENDEBALDEA",
+   "j": 3,
+   "g": 3,
+   "p": 0,
+   "tf": 197,
+   "tc": 159,
+   "pts": 6
+  },
+  {
    "equipo": "C.B. MAKOAK",
    "j": 3,
    "g": 2,
@@ -467,40 +476,31 @@ window.DATOS = {
    "pts": 5
   },
   {
-   "equipo": "MENDEBALDEA",
-   "j": 2,
-   "g": 2,
-   "p": 0,
-   "tf": 124,
-   "tc": 108,
-   "pts": 4
+   "equipo": "CARMELITAS-BASABIDE",
+   "j": 4,
+   "g": 1,
+   "p": 3,
+   "tf": 217,
+   "tc": 285,
+   "pts": 5
   },
   {
-   "equipo": "CARMELITAS-BASABIDE",
+   "equipo": "ATZURRA SUGOIAK",
    "j": 3,
    "g": 1,
    "p": 2,
-   "tf": 166,
-   "tc": 212,
+   "tf": 157,
+   "tc": 172,
    "pts": 4
   },
   {
    "equipo": "OCCIDENT ATELARI LAKUA BASKET",
-   "j": 3,
+   "j": 4,
    "g": 0,
-   "p": 3,
-   "tf": 124,
-   "tc": 185,
-   "pts": 3
-  },
-  {
-   "equipo": "ATZURRA SUGOIAK",
-   "j": 2,
-   "g": 0,
-   "p": 2,
-   "tf": 97,
-   "tc": 128,
-   "pts": 2
+   "p": 4,
+   "tf": 168,
+   "tc": 245,
+   "pts": 4
   }
  ],
  "ajustes": {
