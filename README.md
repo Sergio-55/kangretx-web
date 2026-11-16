@@ -1,6 +1,6 @@
 # Kangretx Old Stars · Web del equipo
 
-Web: https://kangretx.sergio-3e2.workers.dev (Cloudflare Worker `kangretx`, configuración en `wrangler.jsonc`)
+Web: https://kangretx.oldstars.workers.dev (Cloudflare Worker `kangretx`, configuración en `wrangler.jsonc`)
 
 - `public/` — la web. `public/datos.js` tiene calendario, resultados del grupo, clasificación, estadísticas, plantilla y noticias.
 - `worker/index.js` + `lib/asistencia.js` — sirve la web y la asistencia (email + contraseña del equipo), guardada en Cloudflare D1.
